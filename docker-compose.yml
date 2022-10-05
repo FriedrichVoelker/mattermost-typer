@@ -1,0 +1,5 @@
+services:
+    mattermost-typer:
+        name: mattermost-typer
+        build: .
+        
