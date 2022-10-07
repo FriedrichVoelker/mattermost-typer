@@ -1,5 +1,5 @@
 services:
     mattermost-typer:
-        name: mattermost-typer
+        container_name: mattermost-typer
         build: .
         
