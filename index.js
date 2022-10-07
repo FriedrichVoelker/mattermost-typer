@@ -99,8 +99,11 @@ const makeRequest = async (url, method, body = null) => {
             method: method,
             headers: {
                 'Content-Type': 'application/json',
+                'Origin': 'https://' + process.env.MATTERMOST_URL,
+                'Host': process.env.MATTERMOST_URL,
                 'Authorization': `Bearer ${process.env.MMAUTHTOKEN}`,
-                'Cookie': `MMAUTHTOKEN=${process.env.MMAUTHTOKEN};`
+                'Cookie': `MMAUTHTOKEN=${process.env.MMAUTHTOKEN};`,
+                'X-CSRF-Token': process.env.MMCSRF
             },
         })
     } else {
@@ -108,11 +111,15 @@ const makeRequest = async (url, method, body = null) => {
             method: method,
             headers: {
                 'Content-Type': 'application/json',
+                'Origin': 'https://' + process.env.MATTERMOST_URL,
+                'Host': process.env.MATTERMOST_URL,
                 'Authorization': `Bearer ${process.env.MMAUTHTOKEN}`,
-                'Cookie': `MMAUTHTOKEN=${process.env.MMAUTHTOKEN};`
+                'Cookie': `MMAUTHTOKEN=${process.env.MMAUTHTOKEN};`,
+                'X-CSRF-Token': process.env.MMCSRF
             },
             body: JSON.stringify(body)
         })
+        log(body, "debug");
     }
     let json = await res.json()
     log(json, "debug");
